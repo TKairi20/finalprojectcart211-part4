@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test the Algorithm</title>
+    <link rel="stylesheet" href="design.css">
+
+    <style>
+
+        /* Highlight the selected choice */
+        .choice.selected {
+            border-color: var(--cyan);
+            background: rgba(77, 141, 255, 0.15);
+            box-shadow: 0 0 20px rgba(114, 217, 247, 0.12);
+        }
+
+        .choice {
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+
+        /* Feedback after selection */
+        .choice-feedback {
+            margin-top: 22px;
+            padding: 18px;
+            border-left: 3px solid var(--cyan);
+            background: rgba(77, 141, 255, 0.08);
+            border-radius: 0 8px 8px 0;
+            line-height: 1.7;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="index.html">THE PREDICTION EXPERIMENT</a>
+    <span class="page-name">Surprise the system</span>
+
+    <details class="menu">
+        <summary>☰ MENU</summary>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="advertisement.html">Advertisements</a>
+            <a href="datacycle.html">Data cycle</a>
+            <a href="predictanswer.html">Predict Answers</a>
+            <a href="benefits.html">Who benefits?</a>
+            <a href="report.html">Final report</a>
+        </nav>
+    </details>
+</header>
+
+<main>
+
+    <p class="eyebrow">08 / A small experiment</p>
+
+    <h1>CAN YOU<br>
+        <span class="purple">SURPRISE THE SYSTEM?</span>
+    </h1>
+
+    <p class="lead">
+        Even though a the system creates a prediction based on patterns, people do not always
+        behave predictably. Choose an option and see how a
+        system might interpret it.
+    </p>
+
+
+    <div class="panel" style="margin-top:28px;">
+
+        <p class="eyebrow">THE QUESTION</p>
+
+        <h2>What would you rather do this weekend?</h2>
+
+
+        <div class="choices">
+
+            <!-- Option A -->
+            <button
+                class="choice"
+                id="choiceA"
+                type="button"
+                onclick="pick('Stay home and watch something familiar', 'A')">
+
+                <span class="tag">OPTION A</span>
+
+                <h3 style="margin-top:12px;">Stay home</h3>
+
+                <p>Watch something familiar and relax.</p>
+
+            </button>
+
+
+            <!-- Option B -->
+            <button
+                class="choice"
+                id="choiceB"
+                type="button"
+                onclick="pick('Try an activity you have never done', 'B')">
+
+                <span class="tag">OPTION B</span>
+
+                <h3 style="margin-top:12px;">Try something new</h3>
+
+                <p>Explore an activity you have never done.</p>
+
+            </button>
+
+        </div>
+
+
+        <!-- Feedback appears after a choice is made. -->
+        <div id="picked" style="display:none;">
+
+            <div class="choice-feedback">
+
+                <p class="eyebrow">YOUR RESPONSE</p>
+
+                <h3 id="selectedTitle"></h3>
+
+                <p id="selectedExplanation"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="actions">
+        <a class="btn alt" href="main.html">BACK TO MAIN</a>
+    </div>
+
+</main>
+
+<footer>
+    <span>THE PREDICTION EXPERIMENT</span>
+    <span>Tasha Pakita Kanzi - CART 211</span>
+</footer>
+
+
+<script>
+
+// Save and display the visitor's choice.
+function pick(choice, option) {
+
+    const choiceA = document.getElementById("choiceA");
+    const choiceB = document.getElementById("choiceB");
+
+    const feedback = document.getElementById("picked");
+    const selectedTitle = document.getElementById("selectedTitle");
+    const selectedExplanation = document.getElementById("selectedExplanation");
+
+    // Remove the selected appearance from both buttons.
+    choiceA.classList.remove("selected");
+    choiceB.classList.remove("selected");
+
+    // Highlight the selected button.
+    if (option === "A") {
+        choiceA.classList.add("selected");
+    } else {
+        choiceB.classList.add("selected");
+    }
+
+    // Display the visitor's selection.
+    selectedTitle.textContent = "You chose: " + choice;
+
+    // Explain how a system might interpret the choice.
+    if (option === "A") {
+
+        selectedExplanation.textContent =
+            "A system might interpret this as a preference for familiar content, relaxation, or predictable activities. It could use this signal to recommend similar entertainment in the future.";
+
+    } else {
+
+        selectedExplanation.textContent =
+            "A system might interpret this as an interest in exploration and novelty. It could use this signal to recommend unfamiliar activities, experiences, or products.";
+
+    }
+
+    // Reveal the feedback section.
+    feedback.style.display = "block";
+
+    // Save the choice for the final report.
+    localStorage.setItem("experimentTestChoice", choice);
+
+    localStorage.setItem("experimentTestOption", option);
+
+}
+
+</script>
+
+</body>
+</html>

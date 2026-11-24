@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="index.html">THE PREDICTION EXPERIMENT</a>
+    <span class="page-name">Prediction</span>
+
+    <details class="menu">
+        <summary>☰ MENU</summary>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="advertisement.html">Advertisements</a>
+            <a href="datacycle.html">Data cycle</a>
+            <a href="predictanswer.html">Predict Answers</a>
+            <a href="benefits.html">Who benefits?</a>
+            <a href="report.html">Final report</a>
+        </nav>
+    </details>
+</header>
+
+<main>
+
+    <p class="eyebrow">05 / Prediction system</p>
+
+    <h1>WHAT WILL YOU<br>
+        <span class="purple">DO NEXT?</span>
+    </h1>
+
+    <p class="lead">
+        Prediction systems use previous action from the past to
+        create an estimation as to what someone might do in the future.
+    </p>
+
+    <div class="stage">
+
+        <span class="tag">SIMULATED PREDICTION</span>
+
+        <p class="bigword" id="predictionText">
+            START<br>A NEW PREDICTION.
+        </p>
+
+        <p id="predictionExplanation">
+            Your previous answers contain signals that a predictive
+            system could use to estimate your future actions.
+            Generate a prediction to see an example.
+        </p>
+
+        <div class="actions" style="justify-content:center;">
+
+            <button id="generateButton" onclick="generatePrediction()">
+                GENERATE PREDICTION
+            </button>
+
+        </div>
+
+        <!-- These buttons only appear after a prediction is generated. -->
+        <div id="responseArea" style="display:none;">
+
+            <p style="margin-top:25px;">
+                Does this prediction sound like you? (Still in development)
+            </p>
+
+            <div class="actions" style="justify-content:center;">
+
+                <button onclick="reply('yes')">
+                    YES, THAT SOUNDS RIGHT
+                </button>
+
+                <button class="btn alt" onclick="reply('no')">
+                    NO, NOT REALLY
+                </button>
+
+            </div>
+
+        </div>
+
+        <p id="reply" style="margin-top:18px;"></p>
+
+    </div>
+
+    <div class="actions">
+        <a class="btn alt" href="main.html">BACK TO MAIN</a>
+    </div>
+
+</main>
+
+<footer>
+    <span>THE PREDICTION EXPERIMENT</span>
+    <span>Tasha Pakita Kanzi - CART 211</span>
+</footer>
+
+<script>
+
+// Retrieve the answers saved from the questionnaire.
+const savedAnswers = JSON.parse(
+    localStorage.getItem("experimentAnswers")
+);
+
+// Generate a simulated prediction.
+function generatePrediction() {
+
+    const predictionText = document.getElementById("predictionText");
+    const explanation = document.getElementById("predictionExplanation");
+    const responseArea = document.getElementById("responseArea");
+    const replyMessage = document.getElementById("reply");
+
+    // If no questionnaire data exists, display a fallback message.
+    if (!savedAnswers) {
+
+        predictionText.textContent = "YOUR DIGITAL HABITS LEAVE CLUES.";
+
+        explanation.textContent =
+            "No questionnaire answers were found. Complete the experiment questionnaire first to generate a prediction.";
+
+        responseArea.style.display = "none";
+
+        return;
+    }
+
+    // Read some of the visitor's answers.
+    const content = savedAnswers.content;
+    const onlineActivity = savedAnswers.onlineActivity;
+    const shopping = savedAnswers.shopping;
+    const discovery = savedAnswers.discovery;
+
+    // Build a prediction using the available answers.
+    let prediction = "YOU MAY EXPLORE SIMILAR CONTENT.";
+    let reason = "Your previous choices suggest that you may return to familiar types of online content.";
+
+    if (shopping && shopping.toLowerCase().includes("often")) {
+
+        prediction = "YOU MAY DISCOVER A NEW PRODUCT.";
+        reason = "Your shopping habits suggest that you may be interested in discovering or exploring products.";
+
+    } else if (content && content.toLowerCase().includes("video")) {
+
+        prediction = "YOU MAY WATCH MORE VIDEOS.";
+        reason = "Your content preferences suggest that video recommendations may attract your attention.";
+
+    } else if (discovery && discovery.toLowerCase().includes("new")) {
+
+        prediction = "YOU MAY EXPLORE SOMETHING NEW.";
+        reason = "Your answers suggest an interest in discovering unfamiliar content or experiences.";
+
+    } else if (onlineActivity) {
+
+        prediction = "YOU MAY RETURN TO YOUR FAVOURITE PLATFORMS.";
+        reason = "Your online activity provides signals that could be used to predict which platforms you might visit again.";
+
+    }
+
+    // Display the generated prediction.
+    predictionText.textContent = prediction;
+    explanation.textContent = reason +
+        " This is a simplified simulation, not a real prediction.";
+
+    // Show the yes/no response buttons.
+    responseArea.style.display = "block";
+
+    // Clear any previous response.
+    replyMessage.textContent = "";
+
+    // Save the generated prediction.
+    localStorage.setItem("experimentPrediction", prediction);
+
+}
+
+// Save the visitor's reaction to the prediction.
+function reply(answer) {
+
+    const replyMessage = document.getElementById("reply");
+
+    if (answer === "yes") {
+
+        replyMessage.textContent =
+            "You accepted the prediction. In a real platform, this answer could become another behavioural signal.";
+
+    } else {
+
+        replyMessage.textContent =
+            "You rejected the prediction. In a real platform, even disagreement can become another signal that a system may collect for analyzing.";
+
+    }
+
+    // Store the visitor's response for the final report.
+    localStorage.setItem("predictionResponse", answer);
+
+}
+
+</script>
+
+</body>
+</html>

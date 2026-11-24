@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Cycle</title>
+    <link rel="stylesheet" href="design.css">
+
+    <style>
+
+        /* Main circular diagram */
+        .cycle-diagram {
+            position: relative;
+            width: 100%;
+            max-width: 760px;
+            aspect-ratio: 1 / 1;
+            margin: 55px auto 35px;
+        }
+
+        /* Circular path behind the four stages */
+        .cycle-ring {
+            position: absolute;
+            width: 65%;
+            height: 65%;
+            left: 17.5%;
+            top: 17.5%;
+            border: 2px dashed rgba(114, 217, 247, 0.5);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(77, 141, 255, 0.08);
+        }
+
+        /* Arrow indicators along the cycle */
+        .cycle-arrow {
+            position: absolute;
+            color: var(--cyan);
+            font-size: 27px;
+            text-shadow: 0 0 15px rgba(114, 217, 247, 0.6);
+            z-index: 2;
+        }
+
+        .arrow-one {
+            top: 14%;
+            right: 21%;
+            transform: rotate(45deg);
+        }
+
+        .arrow-two {
+            bottom: 20%;
+            right: 14%;
+            transform: rotate(135deg);
+        }
+
+        .arrow-three {
+            bottom: 14%;
+            left: 21%;
+            transform: rotate(225deg);
+        }
+
+        .arrow-four {
+            top: 20%;
+            left: 14%;
+            transform: rotate(315deg);
+        }
+
+        /* Center of the diagram */
+        .cycle-center {
+            position: absolute;
+            width: 29%;
+            height: 29%;
+            top: 35.5%;
+            left: 35.5%;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            background: radial-gradient(circle, #243c70, #111a38 75%);
+            border: 1px solid var(--blue);
+            box-shadow:
+                0 0 25px rgba(77, 141, 255, 0.2),
+                inset 0 0 25px rgba(77, 141, 255, 0.12);
+        }
+
+        .cycle-center span {
+            color: var(--cyan);
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .cycle-center strong {
+            color: var(--white);
+            font-size: clamp(13px, 2vw, 19px);
+            line-height: 1.3;
+        }
+
+        /* Individual stages */
+        .cycle-step {
+            position: absolute;
+            width: 28%;
+            min-height: 155px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: rgba(18, 26, 53, 0.97);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+
+        .cycle-step b {
+            display: block;
+            color: var(--cyan);
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .cycle-step h3 {
+            color: var(--white);
+            font-size: 17px;
+            margin-bottom: 9px;
+        }
+
+        .cycle-step p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .collect {
+            top: 0;
+            left: 36%;
+        }
+
+        .analyze {
+            top: 36%;
+            right: 0;
+        }
+
+        .predict {
+            bottom: 0;
+            left: 36%;
+        }
+
+        .influence {
+            top: 36%;
+            left: 0;
+        }
+
+        /* Mobile layout */
+        @media (max-width: 650px) {
+
+            .cycle-diagram {
+                aspect-ratio: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                margin-top: 30px;
+            }
+
+            .cycle-ring,
+            .cycle-arrow {
+                display: none;
+            }
+
+            .cycle-center {
+                position: relative;
+                width: 160px;
+                height: 160px;
+                left: auto;
+                top: auto;
+                align-self: center;
+                order: 0;
+            }
+
+            .cycle-step {
+                position: relative;
+                width: 100%;
+                min-height: auto;
+                left: auto;
+                right: auto;
+                top: auto;
+                bottom: auto;
+            }
+
+            .collect {
+                order: 1;
+            }
+
+            .analyze {
+                order: 2;
+            }
+
+            .predict {
+                order: 3;
+            }
+
+            .influence {
+                order: 4;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="index.html">THE PREDICTION EXPERIMENT</a>
+    <span class="page-name">Data Cycle</span>
+
+    <details class="menu">
+        <summary>☰ MENU</summary>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="advertisement.html">Advertisements</a>
+            <a href="datacycle.html">Data cycle</a>
+            <a href="predictanswer.html">Predict Answers</a>
+            <a href="benefits.html">Who benefits?</a>
+            <a href="report.html">Final report</a>
+        </nav>
+    </details>
+</header>
+
+<main>
+
+    <p class="eyebrow">07 / Data cycle</p>
+
+    <h1>THE DATA<br>
+        <span class="accent">CYCLE.</span>
+    </h1>
+
+    <p class="lead">
+        Behavioural data can move through a repeating process in which predictions
+        can be made by shaping what people see and do next.
+    </p>
+
+
+    <!-- Circular data cycle diagram -->
+    <div class="cycle-diagram">
+
+        <!-- Circular path -->
+        <div class="cycle-ring"></div>
+
+        <!-- Direction indicators -->
+        <span class="cycle-arrow arrow-one">➜</span>
+        <span class="cycle-arrow arrow-two">➜</span>
+        <span class="cycle-arrow arrow-three">➜</span>
+        <span class="cycle-arrow arrow-four">➜</span>
+
+
+        <!-- Center of the cycle -->
+        <div class="cycle-center">
+            <span>BEHAVIOURAL</span>
+            <strong>DATA<br>CYCLE</strong>
+        </div>
+
+
+        <!-- Stage 1 -->
+        <section class="cycle-step collect">
+
+            <b>FIRST STAGE</b>
+
+            <h3>COLLECT</h3>
+
+            <p>
+                Clicks, searches, views and other actions
+                create signals.
+            </p>
+
+        </section>
+
+
+        <!-- Stage 2 -->
+        <section class="cycle-step analyze">
+
+            <b>SECOND STAGE</b>
+
+            <h3>ANALYZE</h3>
+
+            <p>
+                Signals are organized to identify patterns
+                and possible interests.
+            </p>
+
+        </section>
+
+
+        <!-- Stage 3 -->
+        <section class="cycle-step predict">
+
+            <b>THIRD STAGE</b>
+
+            <h3>PREDICT</h3>
+
+            <p>
+                Patterns can be used to predict what
+                someone may do next.
+            </p>
+
+        </section>
+
+
+        <!-- Stage 4 -->
+        <section class="cycle-step influence">
+
+            <b>FOURTH STAGE</b>
+
+            <h3>INFLUENCE</h3>
+
+            <p>
+                Recommendations and targeted content
+                may shape future actions.
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <div class="panel" style="margin-top:42px; text-align:center;">
+
+        <h2 class="accent">FIFTH STAGE - IT RESTARTS AGAIN.</h2>
+
+        <p>
+            New actions will create new signals, which will then continue the cycle.
+        </p>
+
+    </div>
+
+
+    <div class="actions">
+        <a class="btn alt" href="main.html">BACK TO MAIN</a>
+    </div>
+
+</main>
+
+<footer>
+    <span>THE PREDICTION EXPERIMENT</span>
+    <span>Tasha Pakita Kanzi - CART 211</span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisements</title>
+    <link rel="stylesheet" href="design.css">
+
+    <style>
+        /* Advertisement video thumbnails */
+        .advisual {
+            width: 100%;
+            min-height: 190px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+            font-family: inherit;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: transform 0.25s, filter 0.25s;
+        }
+
+        .advisual:hover {
+            transform: scale(1.02);
+            filter: brightness(1.2);
+        }
+
+        /* Actual YouTube thumbnail */
+        .advisual img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .advisual:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Dark overlay over the thumbnail */
+        .advisual::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        /* Play video button */
+        .advisual span {
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 50px;
+            padding: 12px 22px;
+            background: rgba(0,0,0,0.45);
+        }
+
+        /* Different visual styles as thumbnail fallbacks */
+        .gaming {
+            background: linear-gradient(135deg, #15113d, #5940a8, #151d47);
+        }
+
+        .art {
+            background: linear-gradient(135deg, #542b64, #d16b9c, #302b70);
+        }
+
+        .technology {
+            background: linear-gradient(135deg, #092c4c, #168caa, #152a62);
+        }
+
+        .travel {
+            background: linear-gradient(135deg, #174c5a, #58a69a, #263b69);
+        }
+
+        .education {
+            background: linear-gradient(135deg, #26316a, #477ac2, #5b4b91);
+        }
+
+        .fashion {
+            background: linear-gradient(135deg, #512747, #b45b82, #392c64);
+        }
+
+        /* Full-screen video overlay */
+        .video-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background: rgba(3, 5, 18, 0.96);
+        }
+
+        .video-overlay.active {
+            display: flex;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 1100px;
+            position: relative;
+        }
+
+        .video-container iframe {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .close-video {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            padding: 9px 15px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 5px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .close-video:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        @media (max-width: 600px) {
+            .video-overlay {
+                padding: 12px;
+            }
+
+            .video-container iframe {
+                border-radius: 5px;
+            }
+
+            .close-video {
+                top: -45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="index.html">THE PREDICTION EXPERIMENT</a>
+    <span class="page-name">Advertisements</span>
+
+    <details class="menu">
+        <summary>☰ MENU</summary>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="advertisement.html">Advertisements</a>
+            <a href="datacycle.html">Data cycle</a>
+            <a href="predictanswer.html">Predict Answers</a>
+            <a href="benefits.html">Who benefits?</a>
+            <a href="report.html">Final report</a>
+        </nav>
+    </details>
+</header>
+
+<main>
+
+    <p class="eyebrow">06 / Advertisements (Still in dvelopment)</p>
+
+    <h1>PAGE TO TARGET<br>
+        <span class="accent">YOUR ATTENTION</span>
+    </h1>
+
+    <div class="ads" id="advertisementFeed">
+
+        <!-- GAMING -->
+        <article class="ad" data-category="Gaming">
+            <button
+                class="advisual gaming"
+                type="button"
+                aria-label="Play gaming advertisement"
+                onclick="playAd(this)"
+                data-category="Gaming"
+                data-video="K783SDTBKmg">
+
+                <img
+                    src="https://img.youtube.com/vi/K783SDTBKmg/hqdefault.jpg"
+                    alt=""
+                    onerror="this.style.display='none'">
+
+                <span>PLAY VIDEO</span>
+            </button>
+        </article>
+
+        <!-- ART AND DESIGN -->
+        <article class="ad" data-category="Art and design">
+            <button
+                class="advisual art"
+                type="button"
+                aria-label="Play art and design advertisement"
+                onclick="playAd(this)"
+                data-category="Art and design"
+                data-video="6Fp9KofWq9I">
+
+                <img
+                    src="https://img.youtube.com/vi/6Fp9KofWq9I/hqdefault.jpg"
+                    alt=""
+                    onerror="this.style.display='none'">
+
+                <span>PLAY VIDEO</span>
+            </button>
+        </article>
+
+        <!-- TECHNOLOGY -->
+        <article class="ad" data-category="Technology">
+            <button
+                class="advisual technology"
+                type="button"
+                aria-label="Play technology advertisement"
+                onclick="playAd(this)"
+                data-category="Technology"
+                data-video="oYmU8Av_e84">
+
+                <img
+                    src="https://img.youtube.com/vi/oYmU8Av_e84/hqdefault.jpg"
+                    alt=""
+                    onerror="this.style.display='none'">
+
+                <span>PLAY VIDEO</span>
+            </button>
+        </article>
+
+        <!-- TRAVEL -->
+        <article class="ad" data-category="Travel">
+            <button
+                class="advisual travel"
+                type="button"
+                aria-label="Play travel advertisement"
+                onclick="playAd(this)"
+                data-category="Travel"
+                data-video="S1d2kUfTvo0">
+
+                <img
+                    src="https://img.youtube.com/vi/S1d2kUfTvo0/hqdefault.jpg"
+                    alt=""
+                    onerror="this.style.display='none'">
+
+                <span>PLAY VIDEO</span>
+            </button>
+        </article>
+
+        <!-- EDUCATION -->
+        <article class="ad" data-category="Education">
+            <button
+                class="advisual education"
+                type="button"
+                aria-label="Play education advertisement"
+                onclick="playAd(this)"
+                data-category="Education"
+                data-video="qUfVSh4eaDE">
+
+                <img
+                    src="https://img.youtube.com/vi/qUfVSh4eaDE/hqdefault.jpg"
+                    alt=""
+                    onerror="this.style.display='none'">
+
+                <span>PLAY VIDEO</span>
+            </button>
+        </article>
+
+        <!-- FASHION -->
+        <article class="ad" data-category="Fashion">
+            <button
+                class="advisual fashion"
+                type="button"
+                aria-label="Play fashion advertisement"
+                onclick="playAd(this)"
+                data-category="Fashion"
+                data-video="pwVJizpCuDQ">
+
+                <img
+                    src="https://img.youtube.com/vi/pwVJizpCuDQ/hqdefault.jpg"
+                    alt=""
+                    onerror="this.style.display='none'">
+
+                <span>PLAY VIDEO</span>
+            </button>
+        </article>
+
+    </div>
+
+    <p id="adreply" class="eyebrow" style="margin-top:20px;"></p>
+
+    <div class="actions">
+        <a class="btn alt" href="main.html">BACK TO MAIN</a>
+    </div>
+
+</main>
+
+<footer>
+    <span>THE PREDICTION EXPERIMENT</span>
+    <span>Tasha Pakita Kanzi | CART 211</span>
+</footer>
+
+
+<!-- Video overlay. The iframe is only created when a visitor clicks an ad. -->
+<div
+    class="video-overlay"
+    id="videoOverlay"
+    onclick="closeVideo(event)"
+>
+
+    <div class="video-container">
+
+        <button
+            class="close-video"
+            type="button"
+            onclick="closeVideo()">
+            CLOSE ✕
+        </button>
+
+        <div id="videoPlayer"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// Get the video overlay and player container.
+const videoOverlay = document.getElementById("videoOverlay");
+const videoPlayer = document.getElementById("videoPlayer");
+
+
+// Play the selected advertisement.
+function playAd(button) {
+
+    const category = button.dataset.category;
+    const videoID = button.dataset.video;
+
+    // Check whether the placeholder has been replaced.
+    if (!videoID || videoID.startsWith("REPLACE_WITH")) {
+
+        document.getElementById("adreply").textContent =
+            "This video is a placeholder. Add a YouTube video ID to play it.";
+
+        return;
+    }
+
+    // Save the selected category.
+    localStorage.setItem("selectedAdCategory", category);
+
+    // Create the video only after the visitor clicks.
+    videoPlayer.innerHTML = "";
+
+    const iframe = document.createElement("iframe");
+
+    iframe.src =
+        "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(videoID) +
+        "?autoplay=1&rel=0";
+
+    iframe.title = "Advertisement video";
+    iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+    iframe.allowFullscreen = true;
+    iframe.loading = "lazy";
+
+    videoPlayer.appendChild(iframe);
+
+    // Open the overlay.
+    videoOverlay.classList.add("active");
+
+    // Prevent the background page from scrolling.
+    document.body.style.overflow = "hidden";
+
+    document.getElementById("adreply").textContent =
+        "You interacted with an advertisement. Your feed may now change.";
+}
+
+
+// Close the video and stop playback.
+function closeVideo(event) {
+
+    // If the visitor clicks inside the video, do not close it.
+    if (event && event.target !== videoOverlay) {
+        return;
+    }
+
+    videoOverlay.classList.remove("active");
+
+    // Removing the iframe stops the video.
+    videoPlayer.innerHTML = "";
+
+    document.body.style.overflow = "";
+}
+
+
+// Allow the visitor to close the overlay using Escape.
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        closeVideo();
+    }
+
+});
+
+
+// Personalize the feed using the previously selected category.
+function personalizeFeed() {
+
+    const selectedCategory =
+        localStorage.getItem("selectedAdCategory");
+
+    if (!selectedCategory) {
+        return;
+    }
+
+    // Categories that are considered related for this simulation.
+    const relatedCategories = {
+        "Gaming": ["Technology"],
+        "Technology": ["Gaming"],
+        "Art and design": ["Education"],
+        "Education": ["Art and design"],
+        "Travel": ["Fashion"],
+        "Fashion": ["Travel"]
+    };
+
+    const related =
+        relatedCategories[selectedCategory] || [];
+
+    const feed = document.getElementById("advertisementFeed");
+
+    const ads = Array.from(feed.children);
+
+    // Put the selected category and related categories first.
+    ads.sort(function(a, b) {
+
+        const categoryA = a.dataset.category;
+        const categoryB = b.dataset.category;
+
+        function getPriority(category) {
+
+            if (category === selectedCategory) {
+                return 0;
+            }
+
+            if (related.includes(category)) {
+                return 1;
+            }
+
+            return 2;
+        }
+
+        return getPriority(categoryA) - getPriority(categoryB);
+
+    });
+
+    // Reinsert the cards in their new order.
+    ads.forEach(function(ad) {
+        feed.appendChild(ad);
+    });
+
+}
+
+
+// Run personalization when the page loads.
+personalizeFeed();
+
+</script>
+
+</body>
+</html>

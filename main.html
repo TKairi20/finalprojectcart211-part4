@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Hub</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="index.html">THE PREDICTION EXPERIMENT</a>
+    <span class="page-name">Main</span>
+
+    <details class="menu">
+        <summary>☰ MENU</summary>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="advertisement.html">Advertisements</a>
+            <a href="datacycle.html">Data cycle</a>
+            <a href="predictanswer.html">Predict Answers</a>
+            <a href="benefits.html">Who benefits?</a>
+            <a href="report.html">Final report</a>
+        </nav>
+    </details>
+</header>
+
+<main>
+
+    <p class="eyebrow">04 / Main</p>
+
+    <h1><span class="accent">PROFILE</span> PAGE<br>
+    </h1>
+
+    <p class="lead">
+        Based on your answers, the experiment has created a behavioural profile. This page is still in
+        development.
+    </p>
+
+    <div class="hub">
+
+        <!-- Future Three.js model will be placed here. -->
+        <section class="model">
+
+            <div>
+                <img
+                    src="images/default.jpg"
+                    alt="Visual representation of your predicted digital self"
+                >
+
+                <p style="margin-top:15px;">
+                    Profile image / Still in development
+                </p>
+            </div>
+
+        </section>
+
+        <section>
+
+            <div class="panel">
+
+                <p class="eyebrow">Your profile</p>
+
+                <h2>THE DIGITAL <span class="purple">EXPLORER</span></h2>
+
+                <p>
+                    This is a digital profile created based on your answers. It represents how a platform can group your online information to create an online persona. Its appearance and attributes
+                    can become more specific as your digital behaviour
+                    is collected and interpreted.
+                </p>
+
+                <div class="tags" id="profileTags">
+                    <span class="tag">Curious</span>
+                    <span class="tag">Connected</span>
+                    <span class="tag">Exploratory</span>
+                </div>
+
+            </div>
+
+            <p class="eyebrow" style="margin-top:20px;">
+                Choose your next destination
+            </p>
+
+            <!-- These links can eventually be arranged around the 3D model. -->
+            <div class="orbit">
+
+                <a href="prediction.html">Prediction</a>
+                <a href="advertisement.html">Advertisements</a>
+                <a href="datacycle.html">Data Cycle</a>
+                <a href="predictanswer.html">Predict Test</a>
+                <a href="benefits.html">Who Benefits?</a>
+                <a href="report.html">Final Report</a>
+
+            </div>
+
+            <div class="panel" style="margin-top:18px;">
+
+                <h3>Collected attributes</h3>
+
+                <p>
+                    Your questionnaire answers are saved in this page.
+                    The future profile image will use them as
+                    visual references.
+                </p>
+
+                <a class="btn alt" style="margin-top:12px;"
+                   href="confirmquiz.html">VIEW DATA TREE</a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+<footer>
+    <span>THE PREDICTION EXPERIMENT</span>
+    <span>Tasha Pakita Kanzi - CART 211</span>
+</footer>
+
+<script>
+
+// Retrieve the answers saved from the questionnaire.
+const savedAnswers = JSON.parse(
+    localStorage.getItem("experimentAnswers")
+);
+
+// Select the profile tags container.
+const profileTags = document.getElementById("profileTags");
+
+// If answers exist, use some of them to create profile attributes.
+if (savedAnswers) {
+
+    // These are simple examples of how answers can be translated
+    // into profile characteristics.
+    const profileAttributes = [];
+
+    if (savedAnswers.phoneTime) {
+        profileAttributes.push("Connected");
+    }
+
+    if (savedAnswers.onlineActivity) {
+        profileAttributes.push("Active online");
+    }
+
+    if (savedAnswers.discovery) {
+        profileAttributes.push("Curious");
+    }
+
+    if (savedAnswers.content) {
+        profileAttributes.push("Content-driven");
+    }
+
+    if (savedAnswers.shopping) {
+        profileAttributes.push("Consumer");
+    }
+
+    // Remove duplicate attributes.
+    const uniqueAttributes = [...new Set(profileAttributes)];
+
+    // Display the generated attributes.
+    if (uniqueAttributes.length > 0) {
+
+        profileTags.innerHTML = "";
+
+        uniqueAttributes.slice(0, 4).forEach(attribute => {
+
+            const tag = document.createElement("span");
+
+            tag.className = "tag";
+            tag.textContent = attribute;
+
+            profileTags.appendChild(tag);
+
+        });
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

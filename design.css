@@ -1,0 +1,1058 @@
+
+/* =========================================
+   FONT SETTINGS
+   ========================================= */
+
+/* Put your Redaction 50 font file inside a folder named "fonts".
+   Make sure its filename matches the one below. */
+
+@font-face {
+    font-family: "Redaction 50";
+    src: url("fonts/Redaction_50-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Archivo is loaded from Google Fonts. */
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap");
+
+
+/* =========================================
+   GENERAL SETTINGS
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --night: #090d20;
+    --panel: #121a35;
+    --blue: #4d8dff;
+    --cyan: #72d9f7;
+    --purple: #9b83ff;
+    --white: #f3f5ff;
+    --muted: #a8b4d4;
+    --line: #34446c;
+    --red: #ff7892;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--night);
+    color: var(--white);
+    font-family: "Archivo", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+    font-family: "Redaction 50", Georgia, serif;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(36px, 6vw, 68px);
+}
+
+h2 {
+    font-size: clamp(25px, 4vw, 36px);
+}
+
+h3 {
+    font-size: 23px;
+}
+
+p {
+    color: var(--muted);
+}
+
+a {
+    color: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================================
+   HEADER AND MENU
+   ========================================= */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 5%;
+    background: #0c1228;
+    border-bottom: 1px solid var(--line);
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-family: "Redaction 50", Georgia, serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.page-name {
+    color: var(--cyan);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.menu {
+    position: relative;
+}
+
+.menu summary {
+    cursor: pointer;
+    list-style: none;
+    border: 1px solid var(--line);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.menu summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Pages 1, 2 and 3 will use class="no-nav" on body. */
+
+.no-nav .menu {
+    display: none;
+}
+
+.menu nav {
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    top: 42px;
+    width: 230px;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 30px #0008;
+}
+
+.menu nav a {
+    display: block;
+    padding: 9px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu nav a:hover {
+    background: #24345d;
+    color: var(--cyan);
+}
+
+
+/* =========================================
+   SHARED PAGE SPACING
+   ========================================= */
+
+main {
+    width: min(1160px, 90%);
+    margin: auto;
+    padding: 55px 0 75px;
+}
+
+.eyebrow {
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    margin-bottom: 14px;
+}
+
+.lead {
+    max-width: 680px;
+    margin-top: 16px;
+    font-size: 17px;
+}
+
+.accent {
+    color: var(--cyan);
+}
+
+.purple {
+    color: var(--purple);
+}
+
+.small-text {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.btn,
+button {
+    display: inline-block;
+    padding: 11px 18px;
+    border: 1px solid var(--cyan);
+    border-radius: 4px;
+    background: var(--cyan);
+    color: var(--night);
+    font: 600 14px "Archivo", Arial, sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: filter 0.2s, background 0.2s, color 0.2s;
+}
+
+.btn.alt {
+    color: white;
+    background: transparent;
+    border-color: var(--line);
+}
+
+.btn:hover,
+button:hover {
+    filter: brightness(1.15);
+}
+
+.btn:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+
+/* =========================================
+   PANELS AND CARDS
+   ========================================= */
+
+.panel,
+.card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 22px;
+}
+
+.panel p,
+.card p {
+    margin-top: 8px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    color: var(--cyan);
+    font-size: 11px;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px 5%;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* =========================================
+   PAGE 1: INTRODUCTION
+   ========================================= */
+
+.intro {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 40px;
+    min-height: 65vh;
+}
+
+.art {
+    min-height: 330px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: radial-gradient(circle, #263c75, transparent 70%);
+}
+
+/* Image placeholder for the introduction page. */
+
+.art img {
+    width: 100%;
+    height: 100%;
+    min-height: 330px;
+    object-fit: cover;
+}
+
+/* Kept in case an older page still uses the orb. */
+
+.orb {
+    width: 180px;
+    height: 180px;
+    border: 2px solid var(--cyan);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--cyan);
+    font-family: "Redaction 50", Georgia, serif;
+}
+
+
+/* =========================================
+   PAGE 2: QUESTIONNAIRE
+   ========================================= */
+
+.questions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.question {
+    min-width: 0;
+    padding: 20px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--blue);
+}
+
+.question:nth-child(even) {
+    border-left-color: var(--purple);
+    transform: translateY(10px);
+}
+
+.question legend {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.question label {
+    display: block;
+    margin: 7px 0;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+input {
+    accent-color: var(--cyan);
+    margin-right: 7px;
+}
+
+
+/* =========================================
+   PAGE 3: ANSWER TREE
+   ========================================= */
+
+.tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin: 35px 0;
+}
+
+.root {
+    position: relative;
+    padding: 14px 25px;
+    background: var(--cyan);
+    color: var(--night);
+    border-radius: 30px;
+    font-family: "Redaction 50", Georgia, serif;
+    text-align: center;
+}
+
+/* The branches form the answer-tree layout. */
+
+.branches {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 15px;
+    padding-top: 30px;
+}
+
+/* Vertical line from the root to the main branch. */
+
+.branches::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    background: var(--cyan);
+    top: 0;
+    left: 50%;
+}
+
+/* Horizontal connecting line. */
+
+.branches::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    background: var(--line);
+    top: 30px;
+    left: 16.5%;
+    right: 16.5%;
+}
+
+.node {
+    position: relative;
+    min-height: 125px;
+    padding: 18px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+/* Small vertical connectors above each answer node. */
+
+.node::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    background: var(--line);
+    top: -16px;
+    left: 50%;
+}
+
+.node strong {
+    display: block;
+    color: var(--cyan);
+    margin-bottom: 8px;
+}
+
+.node p {
+    overflow-wrap: anywhere;
+}
+
+
+/* Individual answers inside the data tree */
+
+.answer {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+}
+
+.answer span {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.answer p {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   PAGE 4: MAIN HUB
+   ========================================= */
+
+.hub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.model {
+    min-height: 420px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    overflow: hidden;
+    border: 1px dashed var(--cyan);
+    background: radial-gradient(circle, #27234e, #0e1730);
+}
+
+/* Image placeholder for the profile hub. */
+
+.model img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    max-height: 520px;
+    object-fit: cover;
+}
+
+/* Kept as a fallback for the previous CSS figure. */
+
+.figure {
+    width: 175px;
+    height: 245px;
+    border: 2px solid var(--purple);
+    border-radius: 48% 48% 35% 35%;
+    display: grid;
+    place-items: center;
+    color: var(--cyan);
+    font-size: 12px;
+}
+
+.orbit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.orbit a {
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 40px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.orbit a:hover {
+    background: var(--cyan);
+    color: var(--night);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+
+/* =========================================
+   PAGE 5: PREDICTION
+   ========================================= */
+
+.stage {
+    margin-top: 30px;
+    padding: 35px;
+    text-align: center;
+    background: #171b43;
+    border: 1px solid var(--purple);
+}
+
+.bigword {
+    margin: 22px 0;
+    color: var(--purple);
+    font: clamp(26px, 5vw, 46px) "Redaction 50", Georgia, serif;
+}
+
+.prediction-result {
+    display: none;
+    margin-top: 25px;
+    padding: 22px;
+    background: #0d1530;
+    border: 1px solid var(--purple);
+}
+
+.prediction-result.visible {
+    display: block;
+}
+
+
+/* =========================================
+   PAGE 6: ADVERTISEMENTS
+   ========================================= */
+
+.ads {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.ad {
+    overflow: hidden;
+    background: var(--panel);
+    border: 1px solid var(--line);
+}
+
+.advisual {
+    min-height: 160px;
+    display: grid;
+    place-items: center;
+    padding: 15px;
+    text-align: center;
+    font: 24px "Redaction 50", Georgia, serif;
+    background: linear-gradient(135deg, #3156a8, #8d5be8);
+}
+
+.ad:nth-child(2) .advisual {
+    background: linear-gradient(135deg, #145d72, #5b9fbb);
+}
+
+.ad:nth-child(3) .advisual {
+    background: linear-gradient(135deg, #6b315f, #d16b8e);
+}
+
+.ad:nth-child(4) .advisual {
+    background: linear-gradient(135deg, #344b8c, #8b9de0);
+}
+
+.ad:nth-child(5) .advisual {
+    background: linear-gradient(135deg, #6a4a2d, #c28d63);
+}
+
+.ad:nth-child(6) .advisual {
+    background: linear-gradient(135deg, #245b54, #76b7a1);
+}
+
+.adinfo {
+    padding: 15px;
+}
+
+/* Make the entire ad card feel interactive. */
+
+.ad button {
+    width: 100%;
+    border-radius: 0;
+}
+
+/* Fullscreen-style video overlay. */
+
+.video-overlay {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    padding: 25px;
+    background: #050816f5;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-overlay.visible {
+    display: flex;
+}
+
+.video-container {
+    position: relative;
+    width: min(100%, 1000px);
+    background: #000;
+    border: 1px solid var(--line);
+}
+
+.video-container iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
+
+.video-close {
+    position: absolute;
+    z-index: 2;
+    top: -45px;
+    right: 0;
+    padding: 8px 14px;
+    background: var(--panel);
+    color: white;
+    border: 1px solid var(--line);
+}
+
+
+/* =========================================
+   PAGE 7: DATA CYCLE
+   ========================================= */
+
+/* Original cycle layout retained as a fallback. */
+
+.cycle {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.step {
+    min-height: 175px;
+    padding: 18px;
+    border-top: 3px solid var(--cyan);
+    background: var(--panel);
+}
+
+.step:nth-child(even) {
+    border-color: var(--purple);
+    transform: translateY(18px);
+}
+
+.step b {
+    color: var(--cyan);
+    font: 25px "Redaction 50", Georgia, serif;
+}
+
+/* Circular diagram layout for the updated data-cycle page. */
+
+.cycle-diagram {
+    position: relative;
+    width: min(100%, 650px);
+    aspect-ratio: 1;
+    margin: 45px auto;
+    border: 1px dashed var(--line);
+    border-radius: 50%;
+    background: radial-gradient(circle, #171d40 0%, #0c1228 65%);
+}
+
+.cycle-node {
+    position: absolute;
+    width: 30%;
+    min-height: 110px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--panel);
+    border: 1px solid var(--cyan);
+    border-radius: 8px;
+}
+
+.cycle-node h3 {
+    color: var(--cyan);
+    font-size: 19px;
+}
+
+.cycle-node p {
+    font-size: 12px;
+}
+
+.cycle-node:nth-child(1) {
+    top: -5%;
+    left: 35%;
+}
+
+.cycle-node:nth-child(2) {
+    top: 35%;
+    right: -5%;
+}
+
+.cycle-node:nth-child(3) {
+    bottom: -5%;
+    left: 35%;
+}
+
+.cycle-node:nth-child(4) {
+    top: 35%;
+    left: -5%;
+}
+
+.cycle-arrow {
+    position: absolute;
+    color: var(--purple);
+    font-size: 27px;
+}
+
+.cycle-arrow:nth-of-type(1) {
+    top: 22%;
+    right: 15%;
+}
+
+.cycle-arrow:nth-of-type(2) {
+    bottom: 20%;
+    right: 15%;
+}
+
+.cycle-arrow:nth-of-type(3) {
+    bottom: 20%;
+    left: 15%;
+}
+
+.cycle-arrow:nth-of-type(4) {
+    top: 22%;
+    left: 15%;
+}
+
+
+/* =========================================
+   PAGE 8: PREDICTION CHOICES
+   ========================================= */
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.choice {
+    min-height: 160px;
+    text-align: left;
+    padding: 22px;
+    background: var(--panel);
+    color: white;
+    border: 1px solid var(--line);
+}
+
+.choice:hover {
+    border-color: var(--cyan);
+    background: #1a2547;
+}
+
+
+/* =========================================
+   PAGE 9: BENEFITS
+   ========================================= */
+
+.benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 25px;
+}
+
+.benefit {
+    padding: 18px;
+    background: var(--panel);
+    border-left: 4px solid var(--blue);
+    margin-bottom: 12px;
+}
+
+.benefit:nth-child(2) {
+    border-color: var(--purple);
+}
+
+.benefit:nth-child(3) {
+    border-color: var(--red);
+}
+
+
+/* =========================================
+   PAGE 10: FINAL REPORT
+   ========================================= */
+
+.report {
+    background: linear-gradient(#101c3d, #282044 55%, #4a1e36);
+}
+
+.report header {
+    background: transparent;
+}
+
+.reportline {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px;
+    margin-top: 10px;
+    background: #15172c;
+    border: 1px solid #68445f;
+}
+
+.reportline span:last-child {
+    color: #ffb3c0;
+    text-align: right;
+}
+
+/* Space for the answers collected from the questionnaire. */
+
+.report-answers {
+    margin-top: 25px;
+}
+
+.report-answer {
+    padding: 16px;
+    margin-top: 10px;
+    background: #15172c;
+    border: 1px solid #68445f;
+}
+
+.report-answer strong {
+    display: block;
+    color: #ffb3c0;
+    margin-bottom: 6px;
+}
+
+.report-answer p {
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   MOBILE LAYOUT
+   ========================================= */
+
+@media (max-width: 760px) {
+
+    header {
+        flex-wrap: wrap;
+    }
+
+    .page-name {
+        order: 3;
+        width: 100%;
+    }
+
+    main {
+        padding: 38px 0 55px;
+    }
+
+    .intro,
+    .hub,
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .art {
+        min-height: 240px;
+    }
+
+    .art img {
+        min-height: 240px;
+    }
+
+    .questions,
+    .branches,
+    .ads,
+    .cycle,
+    .choices {
+        grid-template-columns: 1fr;
+    }
+
+    .question:nth-child(even),
+    .step:nth-child(even) {
+        transform: none;
+    }
+
+    /* Stack answer-tree nodes on narrow screens. */
+
+    .branches {
+        padding-top: 0;
+    }
+
+    .branches::before,
+    .branches::after,
+    .node::before {
+        display: none;
+    }
+
+    .node {
+        min-height: auto;
+    }
+
+    .model {
+        min-height: 290px;
+    }
+
+    .model img {
+        min-height: 290px;
+    }
+
+    .cycle-diagram {
+        width: min(100%, 460px);
+        aspect-ratio: auto;
+        border: 0;
+        border-radius: 0;
+        background: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .cycle-node {
+        position: static;
+        width: 85%;
+        min-height: 100px;
+    }
+
+    .cycle-arrow {
+        position: static;
+        transform: rotate(90deg);
+    }
+
+    footer {
+        flex-direction: column;
+    }
+
+    .reportline {
+        flex-direction: column;
+    }
+
+    .reportline span:last-child {
+        text-align: left;
+    }
+
+    .video-overlay {
+        padding: 15px;
+    }
+}
+
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media (max-width: 420px) {
+
+    .orbit {
+        grid-template-columns: 1fr;
+    }
+
+    .actions .btn,
+    .actions button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .stage {
+        padding: 22px 15px;
+    }
+
+    .panel,
+    .card {
+        padding: 17px;
+    }
+
+    .menu nav {
+        width: min(230px, 85vw);
+    }
+
+    .cycle-node {
+        width: 100%;
+    }
+}

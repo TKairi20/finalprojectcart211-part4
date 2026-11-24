@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Tree | The Prediction Experiment</title>
+
+    <!-- Shared stylesheet -->
+    <link rel="stylesheet" href="design.css">
+</head>
+
+
+<body class="no-nav">
+
+    <!-- HEADER -->
+    <header>
+
+        <a class="logo" href="index.html">
+            THE PREDICTION EXPERIMENT
+        </a>
+
+        <span class="page-name">Data Tree</span>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <p class="eyebrow">
+            03 / Answers
+        </p>
+
+        <h1>
+            YOUR ANSWERS AS A<br>
+            <span class="accent">DATA TREE.</span>
+        </h1>
+
+        <p class="lead">
+            Your answers are grouped into categories.
+            This visual represents how separate actions can become a profile.
+        </p>
+
+
+        <!-- DATA TREE -->
+        <section class="tree">
+
+            <!-- CENTRAL ROOT -->
+            <div class="root">
+                YOUR ANSWERS
+            </div>
+
+
+            <!-- MAIN BRANCHES -->
+            <div class="branches">
+
+
+                <!-- BRANCH 1: ACTIVITY -->
+                <div class="node">
+
+                    <strong>ACTIVITY</strong>
+
+                    <div class="answer">
+                        <span>Phone usage</span>
+                        <p id="phoneTime">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Online activity</span>
+                        <p id="onlineActivity">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Shopping frequency</span>
+                        <p id="shopping">—</p>
+                    </div>
+
+                </div>
+
+
+                <!-- BRANCH 2: PREFERENCES -->
+                <div class="node">
+
+                    <strong>PREFERENCES</strong>
+
+                    <div class="answer">
+                        <span>Content interests</span>
+                        <p id="content">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Watching habits</span>
+                        <p id="watchChoice">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Content discovery</span>
+                        <p id="discovery">—</p>
+                    </div>
+
+                </div>
+
+
+                <!-- BRANCH 3: DECISIONS -->
+                <div class="node">
+
+                    <strong>DECISIONS</strong>
+
+                    <div class="answer">
+                        <span>Recommended content</span>
+                        <p id="clickRate">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Decision influences</span>
+                        <p id="influence">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Advertisement behaviour</span>
+                        <p id="advertisement">—</p>
+                    </div>
+
+                    <div class="answer">
+                        <span>Influence of recommendations</span>
+                        <p id="influenceLevel">—</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPLANATION -->
+        <div class="panel">
+
+            <h3>What does this represent?</h3>
+
+            <p>
+                These answers are a representation of "signals" recorded by platform
+                to help make predictions. A real platform will collect more signals
+                than just this quiz.
+            </p>
+
+        </div>
+
+
+        <!-- NAVIGATION BUTTONS -->
+        <div class="actions">
+
+            <a class="btn alt" href="quiz.html">
+                EDIT ANSWERS
+            </a>
+
+            <a class="btn" href="main.html">
+                CONTINUE TO PROFILE
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <span>THE PREDICTION EXPERIMENT</span>
+
+        <span>Tasha Pakita Kanzi - CART 211</span>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // Retrieve the answers saved on the questionnaire page.
+        const answers = JSON.parse(
+            localStorage.getItem("experimentAnswers") || "{}"
+        );
+
+
+        // If no answers exist, return to the questionnaire.
+        if (Object.keys(answers).length === 0) {
+
+            alert("Please complete the questionnaire first.");
+
+            window.location.href = "quiz.html";
+
+        }
+
+
+        // Connect each answer to its corresponding HTML element.
+        const fields = {
+
+            phoneTime: "phoneTime",
+
+            onlineActivity: "onlineActivity",
+
+            shopping: "shopping",
+
+            content: "content",
+
+            watchChoice: "watchChoice",
+
+            discovery: "discovery",
+
+            clickRate: "clickRate",
+
+            influence: "influence",
+
+            advertisement: "advertisement",
+
+            influenceLevel: "influenceLevel"
+
+        };
+
+
+        // Display all saved answers.
+        for (const question in fields) {
+
+            const element = document.getElementById(fields[question]);
+
+            if (element && answers[question]) {
+
+                element.textContent = answers[question];
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

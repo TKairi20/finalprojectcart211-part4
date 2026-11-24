@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Report</title>
+    <link rel="stylesheet" href="design.css">
+
+    <style>
+        /* Styling for the collected questionnaire answers */
+        .report-section {
+            margin-top: 28px;
+            border-color: #9a536d;
+        }
+
+        .report-section h2 {
+            margin-bottom: 18px;
+        }
+
+        .report-answer {
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .report-answer:last-child {
+            border-bottom: none;
+        }
+
+        .report-answer span {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffb3c0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .report-answer p {
+            color: var(--white);
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .report-empty {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .report-note {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body class="report">
+
+<header>
+    <a class="logo" href="index.html">THE PREDICTION EXPERIMENT</a>
+    <span class="page-name">Final Report</span>
+
+    <details class="menu">
+        <summary>☰ MENU</summary>
+        <nav>
+            <a href="main.html">Main</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="advertisement.html">Advertisements</a>
+            <a href="datacycle.html">Data cycle</a>
+            <a href="predictanswer.html">Predict Answers</a>
+            <a href="benefits.html">Who benefits?</a>
+            <a href="report.html">Final report</a>
+        </nav>
+    </details>
+</header>
+
+<main>
+    <p class="eyebrow">10 / Experiment complete</p>
+
+    <h1>YOUR DIGITAL<br><span style="color:#ff8da3;">REPORT.</span></h1>
+
+    <p class="lead">
+        This report brings all the information you shared and the choices
+        you made through the experiment. It shows how small pieces of
+        behavioural information can become part of a larger picture.
+    </p>
+
+    <!-- Questionnaire summary -->
+    <div class="panel report-section">
+
+        <span class="tag">SUMMARY</span>
+
+        <div class="reportline">
+            <span>Questionnaire answers</span>
+            <span id="count">Loading...</span>
+        </div>
+
+        <div class="reportline">
+            <span>Prediction response</span>
+            <span id="prediction-response">Loading...</span>
+        </div>
+
+        <div class="reportline">
+            <span>Advertisement interaction</span>
+            <span id="advertisement-choice">Loading...</span>
+        </div>
+
+        <div class="reportline">
+            <span>Unexpected choice</span>
+            <span id="test-choice">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Display all ten questionnaire answers -->
+    <div class="panel report-section">
+
+        <p class="eyebrow">01 / Your recorded signals</p>
+        <h2>QUIZ DATA</h2>
+
+        <div id="answers">
+            <p class="report-empty">Retrieving your answers...</p>
+        </div>
+    </div>
+
+    <!-- Display the generated prediction -->
+    <div class="panel report-section">
+
+        <p class="eyebrow">02 / The system's interpretation of your data</p>
+        <h2>YOUR PREDICTION</h2>
+
+        <div id="prediction-result">
+            <p class="report-empty">Retrieving your prediction...</p>
+        </div>
+    </div>
+
+    <!-- Display the visitor's choices -->
+    <div class="panel report-section">
+
+        <p class="eyebrow">03 / Your interactions</p>
+        <h2>RECORDED CHOICES</h2>
+
+        <div id="interactions">
+            <p class="report-empty">Retrieving your interactions...</p>
+        </div>
+    </div>
+
+    <p class="report-note">
+        This report is created from information stored locally during this experiment. 
+        It is not a real psychological profile or an actual prediction model.
+    </p>
+
+    <div class="actions">
+        <a class="btn alt" href="main.html">CONTINUE EXPLORING</a>
+        <button onclick="endExperiment()">END EXPERIMENT</button>
+    </div>
+
+    <p id="end" style="margin-top:15px;"></p>
+</main>
+
+<footer>
+    <span>THE PREDICTION EXPERIMENT</span>
+    <span>Tasha Pakita Kanzi - CART 211</span>
+</footer>
+
+<script>
+    // Retrieve the questionnaire answers from localStorage.
+    let saved = {};
+
+    try {
+        saved = JSON.parse(
+            localStorage.getItem("experimentAnswers") || "{}"
+        ) || {};
+    } catch (error) {
+        saved = {};
+    }
+
+    // Names of the questionnaire questions.
+    const questionLabels = {
+        phoneTime: "Time spent on your phone",
+        onlineActivity: "Online activity",
+        discovery: "Content discovery",
+        content: "Preferred content",
+        clickRate: "Clicking behaviour",
+        watchChoice: "Watching habits",
+        shopping: "Shopping habits",
+        influence: "Influence of recommendations",
+        advertisement: "Advertising behaviour",
+        influenceLevel: "Level of influence"
+    };
+
+    // Display how many answers were recorded.
+    const answerKeys = Object.keys(questionLabels);
+
+    const answerCount = answerKeys.filter(function(key) {
+        return saved[key] !== undefined && saved[key] !== "";
+    }).length;
+
+    document.getElementById("count").textContent =
+        answerCount + " of 10 saved";
+
+    // Display each questionnaire answer.
+    const answersContainer = document.getElementById("answers");
+
+    answersContainer.innerHTML = "";
+
+    if (answerCount === 0) {
+        answersContainer.innerHTML =
+            '<p class="report-empty">No questionnaire answers were found. You can return to the experiment and complete the questionnaire.</p>';
+    } else {
+        answerKeys.forEach(function(key) {
+
+            const answer = saved[key];
+
+            if (answer !== undefined && answer !== "") {
+
+                const answerBlock = document.createElement("div");
+                answerBlock.className = "report-answer";
+
+                const label = document.createElement("span");
+                label.textContent = questionLabels[key];
+
+                const value = document.createElement("p");
+                value.textContent = answer;
+
+                answerBlock.appendChild(label);
+                answerBlock.appendChild(value);
+
+                answersContainer.appendChild(answerBlock);
+            }
+        });
+    }
+
+    // Retrieve the generated prediction and the visitor's response.
+    const prediction = localStorage.getItem("experimentPrediction");
+    const predictionResponse = localStorage.getItem("predictionResponse");
+
+    document.getElementById("prediction-response").textContent =
+        predictionResponse === "yes" ? "Yes, the prediction matched" :
+        predictionResponse === "no" ? "No, the prediction did not match" :
+        "No response recorded";
+
+    const predictionContainer =
+        document.getElementById("prediction-result");
+
+    predictionContainer.innerHTML = "";
+
+    if (prediction) {
+        const predictionText = document.createElement("p");
+        predictionText.className = "report-empty";
+        predictionText.textContent = prediction;
+        predictionContainer.appendChild(predictionText);
+    } else {
+        predictionContainer.innerHTML =
+            '<p class="report-empty">No prediction was generated during this experiment.</p>';
+    }
+
+    // Retrieve the selected advertisement category.
+    const selectedAd = localStorage.getItem("selectedAdCategory");
+
+    document.getElementById("advertisement-choice").textContent =
+        selectedAd || "No advertisement selected";
+
+    // Retrieve the visitor's final test choice.
+    const testChoice = localStorage.getItem("experimentTestChoice");
+    const testOption = localStorage.getItem("experimentTestOption");
+
+    document.getElementById("test-choice").textContent =
+        testOption && testChoice ?
+        testOption + " — " + testChoice :
+        "No choice recorded";
+
+    // Display the interactions in the report.
+    const interactionsContainer =
+        document.getElementById("interactions");
+
+    const interactionData = [
+        {
+            label: "Your response to the prediction",
+            value: predictionResponse === "yes" ? "Yes" :
+                   predictionResponse === "no" ? "No" :
+                   "No response recorded"
+        },
+        {
+            label: "Advertisement category selected",
+            value: selectedAd || "No advertisement selected"
+        },
+        {
+            label: "Your final test choice",
+            value: testOption && testChoice ?
+                   testOption + " — " + testChoice :
+                   "No choice recorded"
+        }
+    ];
+
+    interactionsContainer.innerHTML = "";
+
+    interactionData.forEach(function(item) {
+
+        const block = document.createElement("div");
+        block.className = "report-answer";
+
+        const label = document.createElement("span");
+        label.textContent = item.label;
+
+        const value = document.createElement("p");
+        value.textContent = item.value;
+
+        block.appendChild(label);
+        block.appendChild(value);
+
+        interactionsContainer.appendChild(block);
+    });
+
+    // Clear the experiment's saved information.
+    function endExperiment() {
+
+        const keysToClear = [
+            "experimentAnswers",
+            "experimentPrediction",
+            "predictionResponse",
+            "selectedAdCategory",
+            "experimentTestChoice",
+            "experimentTestOption"
+        ];
+
+        keysToClear.forEach(function(key) {
+            localStorage.removeItem(key);
+        });
+
+        document.getElementById("count").textContent = "Cleared";
+
+        document.getElementById("answers").textContent =
+            "Your questionnaire answers have been cleared.";
+
+        document.getElementById("prediction-result").textContent =
+            "Your prediction has been cleared.";
+
+        document.getElementById("interactions").textContent =
+            "Your recorded interactions have been cleared.";
+
+        document.getElementById("prediction-response").textContent =
+            "Cleared";
+
+        document.getElementById("advertisement-choice").textContent =
+            "Cleared";
+
+        document.getElementById("test-choice").textContent =
+            "Cleared";
+
+        document.getElementById("end").textContent =
+            "Experiment ended. Your saved experiment data has been cleared from this browser.";
+    }
+</script>
+
+</body>
+</html>
